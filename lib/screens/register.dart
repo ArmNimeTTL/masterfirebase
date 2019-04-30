@@ -34,7 +34,6 @@ class _RegisterState extends State<Register> {
       },
     );
   }
-
   Widget emailText() {
     return TextFormField(
       style: new TextStyle(color: Colors.white),
@@ -69,7 +68,6 @@ class _RegisterState extends State<Register> {
       },
     );
   }
-
   Widget passwordText() {
     return TextFormField(
       style: new TextStyle(color: Colors.white),
@@ -101,7 +99,6 @@ class _RegisterState extends State<Register> {
       obscureText: true,
     );
   }
-
   Widget backButton() {
     return RaisedButton(
       child: new Text('back'),
@@ -113,7 +110,6 @@ class _RegisterState extends State<Register> {
       textColor: Colors.white,
     );
   }
-
   Widget uploadButton() {
     return IconButton(
       icon: Icon(Icons.cloud_upload),
