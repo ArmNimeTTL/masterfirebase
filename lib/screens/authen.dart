@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masterfirebase/screens/register.dart';
 
 class Authen extends StatefulWidget {
   @override
@@ -26,16 +27,23 @@ class _AuthenState extends State<Authen> {
       child: new Text('Sing In'),
       onPressed: () {},
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Colors.pink[400],
+      color: Colors.pink[200],
+      textColor: Colors.white,
     );
   }
 
   Widget singupButton() {
     return RaisedButton(
       child: new Text('Sing Up'),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Register()),
+        );
+      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Colors.pink[200],
+      color: Colors.pink[400],
+      textColor: Colors.white,
     );
   }
 
@@ -61,7 +69,7 @@ class _AuthenState extends State<Authen> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.black, Colors.pink], begin: Alignment(-1, -1))),
+                colors: [Colors.white, Colors.pink], begin: Alignment(-1, -1))),
         // decoration: new BoxDecoration(
         //   image: new DecorationImage(
         //     image: new AssetImage("images/backgrond.jpg"),
