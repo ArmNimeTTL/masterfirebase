@@ -11,10 +11,10 @@ class _RegisterState extends State<Register> {
       style: new TextStyle(color: Colors.white),
       decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(30.0),
               borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(30.0),
               borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
           labelText: 'Name :',
           labelStyle: TextStyle(color: Colors.pink),
@@ -32,10 +32,10 @@ class _RegisterState extends State<Register> {
       style: new TextStyle(color: Colors.white),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
         labelText: 'Email :',
         hintText: 'you@email.com',
@@ -53,10 +53,10 @@ class _RegisterState extends State<Register> {
       style: new TextStyle(color: Colors.white),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
         labelText: 'Password :',
         hintText: 'more 6 charecter',
@@ -96,7 +96,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.black,
         actions: <Widget>[
           new IconButton(
-            icon: new Icon(Icons.search),
+            icon: new Icon(Icons.check),
             onPressed: () {},
           ),
         ],
@@ -110,17 +110,19 @@ class _RegisterState extends State<Register> {
         )),
       ),
       body: Container(
-        // decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //         colors: [Colors.black, Colors.pink], begin: Alignment(-1, -1))),
-        decoration: new BoxDecoration(
-          image: new DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: new AssetImage("images/backgrond.jpg"),
-            fit: BoxFit.cover,
-          ),
-        ),
+        decoration: BoxDecoration(
+            gradient: RadialGradient(
+                colors: [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.purple],
+                radius: 1.5,
+                center: Alignment(-1, -1))),
+        // decoration: new BoxDecoration(
+        //   image: new DecorationImage(
+        //     colorFilter: ColorFilter.mode(
+        //         Colors.black.withOpacity(1.0), BlendMode.dstATop),
+        //     image: new AssetImage("images/backgrond.jpg"),
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
         padding: EdgeInsets.only(top: 100.0),
         alignment: Alignment(0, -1),
         child: Column(
