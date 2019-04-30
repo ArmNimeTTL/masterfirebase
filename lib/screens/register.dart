@@ -8,6 +8,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   // Explicit
   final formKey = GlobalKey<FormState>();
+  String nameString, emailString, passwordString;
 
   Widget nameText() {
     return TextFormField(
@@ -31,6 +32,9 @@ class _RegisterState extends State<Register> {
         if (value.length == 0) {
           return 'PLease Fill Name In The Blank';
         }
+      },
+      onSaved: (String value) {
+        nameString = value;
       },
     );
   }
@@ -66,6 +70,9 @@ class _RegisterState extends State<Register> {
         //   return 'PLease Fill Email Format';
         // }
       },
+      onSaved: (String value) {
+        emailString = value;
+      },
     );
   }
   Widget passwordText() {
@@ -96,6 +103,9 @@ class _RegisterState extends State<Register> {
           return 'PLease Type Password more 6 charecter';
         }
       },
+      onSaved: (String value) {
+        passwordString = value;
+      },
       obscureText: true,
     );
   }
@@ -115,7 +125,10 @@ class _RegisterState extends State<Register> {
       icon: Icon(Icons.cloud_upload),
       tooltip: 'Upload To Firebase',
       onPressed: () {
-        if (formKey.currentState.validate()) {}
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+          print('name = $nameString, email = $emailString, password = $passwordString');
+        }
       },
     );
   }
