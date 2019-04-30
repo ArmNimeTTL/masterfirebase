@@ -8,21 +8,69 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   Widget nameText() {
     return TextFormField(
-      decoration: InputDecoration(labelText: 'Name :', hintText: 'Your Name'),
+      style: new TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+          labelText: 'Name :',
+          labelStyle: TextStyle(color: Colors.pink),
+          counterStyle: TextStyle(color: Colors.pink),
+          hintText: 'Your Name',
+          icon: Icon(
+            Icons.face,
+            color: Colors.pink,
+          )),
     );
   }
 
   Widget emailText() {
     return TextFormField(
-      decoration:
-          InputDecoration(labelText: 'Email :', hintText: 'you@email.com'),
+      style: new TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+        labelText: 'Email :',
+        hintText: 'you@email.com',
+        labelStyle: TextStyle(color: Colors.pink),
+        icon: Icon(
+          Icons.email,
+          color: Colors.pink,
+        ),
+      ),
     );
   }
 
   Widget passwordText() {
     return TextFormField(
+      style: new TextStyle(color: Colors.white),
       decoration: InputDecoration(
-          labelText: 'Password :', hintText: 'more 6 charecter'),
+        enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide(width: 1.0, color: Colors.pink[200])),
+        labelText: 'Password :',
+        hintText: 'more 6 charecter',
+        labelStyle: TextStyle(color: Colors.pink),
+        // enabledBorder:
+        //     UnderlineInputBorder(borderSide: BorderSide(color: Colors.cyan)),
+        // focusedBorder: UnderlineInputBorder(
+        //   borderSide: BorderSide(color: Colors.black),
+        // ),
+        icon: Icon(
+          Icons.lock,
+          color: Colors.pink,
+        ),
+      ),
       obscureText: true,
     );
   }
@@ -34,7 +82,7 @@ class _RegisterState extends State<Register> {
         Navigator.pop(context);
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Colors.black,
+      color: Colors.pink[200],
       textColor: Colors.white,
     );
   }
@@ -46,25 +94,47 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         title: Text('Register'),
         backgroundColor: Colors.black,
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        textTheme: TextTheme(
+            title: TextStyle(
+          color: Colors.white,
+          fontSize: 20.0,
+        )),
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.white, Colors.pink], begin: Alignment(-1, -1))),
+        // decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //         colors: [Colors.black, Colors.pink], begin: Alignment(-1, -1))),
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            image: new AssetImage("images/backgrond.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.only(top: 100.0),
         alignment: Alignment(0, -1),
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0),
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 8.0),
               child: nameText(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0),
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 8.0),
               child: emailText(),
             ),
             Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0),
+              margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 8.0),
               child: passwordText(),
             ),
             Container(
