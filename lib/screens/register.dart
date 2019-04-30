@@ -87,42 +87,47 @@ class _RegisterState extends State<Register> {
     );
   }
 
+  Widget uploadButton() {
+    return IconButton(
+      icon: Icon(Icons.cloud_upload),
+      tooltip: 'Upload To Firebase',
+      onPressed: (){},
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Text('Register'),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.pinkAccent,
         actions: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.check),
-            onPressed: () {},
-          ),
+          uploadButton(),
         ],
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        textTheme: TextTheme(
-            title: TextStyle(
-          color: Colors.white,
-          fontSize: 20.0,
-        )),
+        // iconTheme: IconThemeData(
+        //   color: Colors.red,
+        // ),
+        // textTheme: TextTheme(
+        //     title: TextStyle(
+        //   color: Colors.white,
+        //   fontSize: 20.0,
+        // )),
       ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: RadialGradient(
-                colors: [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.purple],
-                radius: 1.5,
-                center: Alignment(-1, -1))),
-        // decoration: new BoxDecoration(
-        //   image: new DecorationImage(
-        //     colorFilter: ColorFilter.mode(
-        //         Colors.black.withOpacity(1.0), BlendMode.dstATop),
-        //     image: new AssetImage("images/backgrond.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
+        // decoration: BoxDecoration(
+        //     gradient: RadialGradient(
+        //         colors: [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue, Colors.purple],
+        //         radius: 1.5,
+        //         center: Alignment(-1, -1))),
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(1.0), BlendMode.dstATop),
+            image: new AssetImage("images/backgrond.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         padding: EdgeInsets.only(top: 100.0),
         alignment: Alignment(0, -1),
         child: Column(

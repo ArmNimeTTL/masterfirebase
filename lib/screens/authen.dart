@@ -23,26 +23,33 @@ class _AuthenState extends State<Authen> {
   }
 
   Widget singinButton() {
-    return RaisedButton(
-      child: new Text('Sing In'),
-      onPressed: () {},
+    return RaisedButton.icon(
+      icon: Icon(Icons.check),
+      label: Text('Sign In'),
+      onPressed: () {
+        print('test test test test');
+      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Colors.pink[200],
+      color: Colors.pink[400],
       textColor: Colors.white,
     );
   }
 
-  Widget singupButton() {
-    return RaisedButton(
-      child: new Text('Sing Up'),
+  Widget singupButton(BuildContext context) {
+    return RaisedButton.icon(
+      icon: Icon(Icons.perm_contact_calendar),
+      label: Text('Sign Up'),
       onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Register()),
-        );
+        var registerRoute = MaterialPageRoute(builder: (context) => Register());
+        Navigator.of(context).push(registerRoute);
+
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => Register()),
+        // );
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      color: Colors.pink[400],
+      color: Colors.pink[200],
       textColor: Colors.white,
     );
   }
@@ -54,7 +61,7 @@ class _AuthenState extends State<Authen> {
           fontFamily: 'Lobster',
           fontSize: 35.0,
           fontWeight: FontWeight.bold,
-          color: Colors.pink[200]),
+          color: Colors.pinkAccent),
     );
   }
 
@@ -69,7 +76,7 @@ class _AuthenState extends State<Authen> {
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.white, Colors.pink], begin: Alignment(-1, -1))),
+                colors: [Colors.pink, Colors.white], begin: Alignment(-1, -1))),
         // decoration: new BoxDecoration(
         //   image: new DecorationImage(
         //     image: new AssetImage("images/backgrond.jpg"),
@@ -98,7 +105,7 @@ class _AuthenState extends State<Authen> {
               child: passwordText(),
             ),
             Container(
-                margin: EdgeInsets.only(top: 20.0, left: 50.0, right: 50.0),
+                margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -109,7 +116,7 @@ class _AuthenState extends State<Authen> {
                     Expanded(
                         child: Container(
                             margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: singupButton())),
+                            child: singupButton(context))),
                   ],
                 )),
           ],
