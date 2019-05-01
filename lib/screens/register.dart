@@ -131,7 +131,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget uploadButton() {
+  Widget uploadButton(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.cloud_upload),
       tooltip: 'Upload To Firebase',
@@ -140,18 +140,19 @@ class _RegisterState extends State<Register> {
           formKey.currentState.save();
           print(
               'name = $nameString, email = $emailString, password = $passwordString');
-          uploadFunc();
+          uploadFunc(context);
         }
       },
     );
   }
 
-  void uploadFunc() async {
+  void uploadFunc(BuildContext context) async {
     FirebaseUser firebaseUser = await firebaseAuth
         .createUserWithEmailAndPassword(
             email: emailString, password: passwordString)
         .then((response) {
       print('Register Success With => $response');
+      Navigator.pop(context);
     }).catchError((error) {
       String errorMsg = error.message;
       print('HAVE ERROR => $errorMsg');
@@ -182,7 +183,7 @@ class _RegisterState extends State<Register> {
           title: Text('Register'),
           backgroundColor: Colors.pinkAccent,
           actions: <Widget>[
-            uploadButton(),
+            uploadButton(context),
           ],
           // iconTheme: IconThemeData(
           //   color: Colors.red,
