@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -9,6 +10,9 @@ class _RegisterState extends State<Register> {
   // Explicit
   final formKey = GlobalKey<FormState>();
   String nameString, emailString, passwordString;
+
+  // For firebase
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Widget nameText() {
     return TextFormField(
@@ -38,6 +42,7 @@ class _RegisterState extends State<Register> {
       },
     );
   }
+
   Widget emailText() {
     return TextFormField(
       style: new TextStyle(color: Colors.white),
@@ -75,6 +80,7 @@ class _RegisterState extends State<Register> {
       },
     );
   }
+
   Widget passwordText() {
     return TextFormField(
       style: new TextStyle(color: Colors.white),
@@ -109,6 +115,7 @@ class _RegisterState extends State<Register> {
       obscureText: true,
     );
   }
+
   Widget backButton() {
     return RaisedButton(
       child: new Text('back'),
@@ -120,6 +127,7 @@ class _RegisterState extends State<Register> {
       textColor: Colors.white,
     );
   }
+
   Widget uploadButton() {
     return IconButton(
       icon: Icon(Icons.cloud_upload),
@@ -127,10 +135,23 @@ class _RegisterState extends State<Register> {
       onPressed: () {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
-          print('name = $nameString, email = $emailString, password = $passwordString');
+          print(
+              'name = $nameString, email = $emailString, password = $passwordString');
+          uploadFunc();
         }
       },
     );
+  }
+
+  void uploadFunc() async {
+    FirebaseUser firebaseUser = await firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((response) {
+      print('Register Success With => $emailString');
+    }).catchError((String error) {
+      print('HAVE ERROR => $error');
+    });
   }
 
   @override
