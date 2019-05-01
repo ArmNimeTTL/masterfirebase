@@ -14,6 +14,9 @@ class _RegisterState extends State<Register> {
   // For firebase
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
+  // For SnackBar
+  final snackBarKey = GlobalKey<ScaffoldState>();
+
   Widget nameText() {
     return TextFormField(
       style: new TextStyle(color: Colors.white),
@@ -148,15 +151,32 @@ class _RegisterState extends State<Register> {
         .createUserWithEmailAndPassword(
             email: emailString, password: passwordString)
         .then((response) {
-      print('Register Success With => $emailString');
-    }).catchError((String error) {
-      print('HAVE ERROR => $error');
+      print('Register Success With => $response');
+    }).catchError((error) {
+      String errorMsg = error.message;
+      print('HAVE ERROR => $errorMsg');
+      showSnackBar(errorMsg);
     });
+  }
+
+  void showSnackBar(String msg) {
+    SnackBar snackBar = SnackBar(
+      duration: Duration(seconds: 10),
+      content: Text(msg),
+      backgroundColor: Colors.pinkAccent,
+      action: SnackBarAction(
+        textColor: Colors.black,
+        label: 'Close',
+        onPressed: () {},
+      ),
+    );
+    snackBarKey.currentState.showSnackBar(snackBar);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: snackBarKey,
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text('Register'),
