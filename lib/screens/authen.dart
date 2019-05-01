@@ -15,6 +15,9 @@ class _AuthenState extends State<Authen> {
   String titleEmailFalse = 'กรุณากรอกรูปแบบ Email ให้ถูกต้อง';
   String titlePasswordFalse = 'รหัสต้องมีมากกว่า 6 ตัวอักษร';
 
+  // Explicit
+  String emailString, passwordString;
+
   Widget emailText() {
     return TextFormField(
       decoration:
@@ -29,6 +32,9 @@ class _AuthenState extends State<Authen> {
           return titleEmailFalse;
         }
       },
+      onSaved: (String value) {
+        emailString = value;
+      },
     );
   }
 
@@ -42,6 +48,9 @@ class _AuthenState extends State<Authen> {
           return titlePasswordFalse;
         }
       },
+      onSaved: (String value) {
+        passwordString = value;
+      },
     );
   }
 
@@ -54,7 +63,10 @@ class _AuthenState extends State<Authen> {
       textColor: Colors.white,
       onPressed: () {
         print('test test test test');
-        if (formKey.currentState.validate()) {}
+        if (formKey.currentState.validate()) {
+          formKey.currentState.save();
+          print('email ==>> $emailString, password ==>> $passwordString');
+        }
       },
     );
   }
