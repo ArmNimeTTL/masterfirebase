@@ -7,10 +7,28 @@ class Authen extends StatefulWidget {
 }
 
 class _AuthenState extends State<Authen> {
+  // For Form
+  final formKey = GlobalKey<FormState>();
+
+  // constant
+  String titleSpace = 'กรุณากรอกข้อมูลให้ครบค่ะ';
+  String titleEmailFalse = 'กรุณากรอกรูปแบบ Email ให้ถูกต้อง';
+  String titlePasswordFalse = 'รหัสต้องมีมากกว่า 6 ตัวอักษร';
+
   Widget emailText() {
     return TextFormField(
       decoration:
           InputDecoration(labelText: 'Email :', hintText: 'you@email.com'),
+      validator: (String value) {
+        Pattern pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regex = new RegExp(pattern);
+        if (value.length == 0) {
+          return titleSpace;
+        } else if (!regex.hasMatch(value)) {
+          return titleEmailFalse;
+        }
+      },
     );
   }
 
@@ -19,6 +37,11 @@ class _AuthenState extends State<Authen> {
       decoration: InputDecoration(
           labelText: 'Password :', hintText: 'more 6 charecter'),
       obscureText: true,
+      validator: (String value) {
+        if (value.length <= 5) {
+          return titlePasswordFalse;
+        }
+      },
     );
   }
 
@@ -26,12 +49,13 @@ class _AuthenState extends State<Authen> {
     return RaisedButton.icon(
       icon: Icon(Icons.check),
       label: Text('Sign In'),
-      onPressed: () {
-        print('test test test test');
-      },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       color: Colors.pink[400],
       textColor: Colors.white,
+      onPressed: () {
+        print('test test test test');
+        if (formKey.currentState.validate()) {}
+      },
     );
   }
 
@@ -42,7 +66,6 @@ class _AuthenState extends State<Authen> {
       onPressed: () {
         var registerRoute = MaterialPageRoute(builder: (context) => Register());
         Navigator.of(context).push(registerRoute);
-
         // Navigator.push(
         //   context,
         //   MaterialPageRoute(builder: (context) => Register()),
@@ -72,56 +95,59 @@ class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [Colors.pink, Colors.white], begin: Alignment(-1, -1))),
-        // decoration: new BoxDecoration(
-        //   image: new DecorationImage(
-        //     image: new AssetImage("images/backgrond.jpg"),
-        //     fit: BoxFit.cover,
-        //   ),
-        // ),
-        padding: EdgeInsets.only(top: 100.0),
-        alignment: Alignment(0, -1),
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: 300.0,
-              height: 200.0,
-              child: showLogo(),
+        resizeToAvoidBottomPadding: false,
+        body: Form(
+          key: formKey,
+          child: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    colors: [Colors.pink, Colors.white],
+                    begin: Alignment(-1, -1))),
+            // decoration: new BoxDecoration(
+            //   image: new DecorationImage(
+            //     image: new AssetImage("images/backgrond.jpg"),
+            //     fit: BoxFit.cover,
+            //   ),
+            // ),
+            padding: EdgeInsets.only(top: 100.0),
+            alignment: Alignment(0, -1),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: 300.0,
+                  height: 200.0,
+                  child: showLogo(),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 15.0),
+                  child: showAppName(),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: emailText(),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 50.0, right: 50.0),
+                  child: passwordText(),
+                ),
+                Container(
+                    margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(left: 4.0, right: 4.0),
+                                child: singinButton())),
+                        Expanded(
+                            child: Container(
+                                margin: EdgeInsets.only(left: 4.0, right: 4.0),
+                                child: singupButton(context))),
+                      ],
+                    )),
+              ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 15.0),
-              child: showAppName(),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0),
-              child: emailText(),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 50.0, right: 50.0),
-              child: passwordText(),
-            ),
-            Container(
-                margin: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: singinButton())),
-                    Expanded(
-                        child: Container(
-                            margin: EdgeInsets.only(left: 4.0, right: 4.0),
-                            child: singupButton(context))),
-                  ],
-                )),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
