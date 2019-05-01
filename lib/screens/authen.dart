@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masterfirebase/screens/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Authen extends StatefulWidget {
   @override
@@ -17,6 +18,9 @@ class _AuthenState extends State<Authen> {
 
   // Explicit
   String emailString, passwordString;
+
+  // For Firebase
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Widget emailText() {
     return TextFormField(
@@ -66,9 +70,22 @@ class _AuthenState extends State<Authen> {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
           print('email ==>> $emailString, password ==>> $passwordString');
+          checkAuthen();
         }
       },
     );
+  }
+
+  void checkAuthen() async {
+    FirebaseUser firebaseUser = await firebaseAuth
+        .signInWithEmailAndPassword(
+            email: emailString, password: passwordString)
+        .then((response) {
+          print('Success Login ==>> ${response.toString()}');
+        }).catchError((error) {
+          // String  errorMsg = error.message;
+          print('Error ==>> ${error.message}');
+        });
   }
 
   Widget singupButton(BuildContext context) {
